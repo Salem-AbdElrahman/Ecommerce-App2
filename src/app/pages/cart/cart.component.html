@@ -1,0 +1,40 @@
+@if(cartDetails.totalCartPrice){
+  <section class="main-sec shadow w-[75%] p-4 mx-auto">
+    <h1 class="text-center text-3xl text-green-600">Shop Cart</h1>
+   <div class="flex justify-between items-center">
+    <span class="text-green-600">TotalCartPrice: {{cartDetails.totalCartPrice | currency:'GBP'}} </span>
+    <button class="bg-red-600 hover:bg-red-800 text-xs border rounded px-10 py-2 text-white" (click)="clearUserCart()">Clear Cart</button>
+   </div>
+
+   @for(prod of cartDetails.products; track prod.product.id){
+    <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-2">
+      <!-- img -->
+    <div>
+      <img [src]="prod.product.imageCover" class="w-full h-[100px] object-contain" [alt]="prod.product.title">
+    </div>
+       <!-- info -->
+    <div class="flex justify-between items-center">
+      <!-- info -->
+      <div>
+        <h3>{{prod.product.title}}</h3>
+        <h4 class="text-green-600">Price: {{prod.price | currency:"GBP"}}</h4>
+        <button (click)="removeItem(prod.product.id)"><i class="fas fa-trash-can text-green-600"></i> Remove</button>
+      </div>
+      <!-- btns -->
+      <div class="flex items-center gap-4">
+        <button (click)="initCartCount(prod,true)" class="text-green-600 text-3xl"><i class="fa-regular fa-square-plus"></i></button>
+        <span> {{prod.count}} </span>
+        <button (click)="initCartCount(prod,false)" class="text-green-600 text-3xl"><i class="fa-regular fa-square-minus"></i></button>
+        <button (click)="updatCount(prod.product.id,prod.count)" class="inline-flex text-white mx-1 bg-green-500 border-0 py-2 px-2 focus:outline-none hover:bg-green-600 rounded text-lg">
+            update
+        </button>
+      </div>
+    </div>
+  </div>
+   }
+
+   <button class="btn-main" [routerLink]="['/checkout',cartDetails._id]">Check Out</button>
+  </section>
+}@else{
+  <h1 class="text-center text-4xl text-green-600">no data found</h1>
+}

@@ -1,0 +1,27 @@
+ @if(wislist){
+  <section class="main-sec shadow w-[75%] p-4 mx-auto">
+    <h1 class="text-center text-3xl text-green-600">My Wish List</h1>
+   @for(wish of wislist; track $index){
+    <div class="grid md:grid-cols-[10%_minmax(0,1fr)] border-b mb-4">
+      <!-- img -->
+    <div>
+      <img [src]="wish.imageCover" class="w-full h-[100px] object-contain" [alt]="wish.title">
+    </div>
+       <!-- info -->
+    <div class="flex justify-between items-center">
+      <!-- info -->
+      <div>
+        <h3>{{wish.title}}</h3>
+        <h4 class="text-green-600">Price: {{wish.price | currency:"GBP"}}</h4>
+        <button (click)="removeItemFormWishlist(wish.id)" class="text-red-600"><i class="fas fa-trash-can "></i> Remove</button>
+      </div>
+      <!-- btns -->
+<button (click)="addToCart(wish.id)" class="border border-green-600 text-xl bg-transparent px-2 py-2 hover:bg-green-600">add to cart</button>
+    </div>
+  </div>
+   }
+
+  </section>
+}@else{
+  <h1 class="text-center text-4xl text-green-600">no data found</h1>
+}

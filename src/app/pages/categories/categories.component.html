@@ -1,0 +1,17 @@
+@if(categories){
+  <section>
+    <h1 class="text-3xl text-green-600 text-center my-6">All Categories</h1>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 w-[90%] mx-auto">
+      @for(cat of categories;track $index){
+        <div class="border border-green-500/50 rounded-md overflow-hidden shadow relative my-8 hover:shadow-lg hover:shadow-green-400">
+          <div class="card-img">
+            <img [src]="cat.image" class="w-full h-[250px] object-contain" alt="cat.name" />
+          </div>
+          <div class="card-body px-2 py-4">
+            <h4 class="text-green-500 text-xl-center"> {{cat.name}} </h4>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+}
